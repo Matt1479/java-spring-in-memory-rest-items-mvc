@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Create a new item</title>
+    </head>
+
+    <body>
+
+        <header th:replace="~{fragments/header :: header}"></header>
+
+        <main>
+
+            <h1>Create a new item</h1>
+
+            <form th:action="@{/items/new}" method="post">
+
+                <div>
+                    <label for="name">Name</label>
+                    <input id="name" name="name" type="text">
+                </div>
+
+                <div>
+                    <label for="description">Description</label>
+                    <input id="description" name="description" type="text">
+                </div>
+
+                <div>
+                    <label for="price">Price</label>
+                    <input id="price" name="price" step="0.01" type="number">
+                </div>
+
+                <button type="submit">Create item</button>
+                
+            </form>
+
+        </main>
+
+    </body>
+
+</html>

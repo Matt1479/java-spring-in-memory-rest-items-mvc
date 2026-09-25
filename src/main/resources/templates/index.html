@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home</title>
+    </head>
+
+    <body>
+
+        <!-- Find the `header` fragment in `fragments/header.html`
+            and replace this <header></header> with it -->
+        <header th:replace="~{fragments/header :: header}"></header>
+
+        <main>
+            <p>View <a href="/items">items</a></p>
+        </main>
+
+    </body>
+
+</html>
