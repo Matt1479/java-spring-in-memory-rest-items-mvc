@@ -34,6 +34,10 @@ public class ItemService {
         return item;
     }
 
+    public boolean existsById(Long id) {
+        return itemRepository.containsKey(id);
+    }
+
     public Item replaceItem(Item newItem, Long id) {
         if (newItem == null) {
             return null;

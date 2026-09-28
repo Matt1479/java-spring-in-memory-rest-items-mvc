@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller 
 public class ItemWebController {
@@ -28,10 +29,15 @@ public class ItemWebController {
     }
 
     @GetMapping("/items/{id}")
-    public String getItem(@PathVariable Long id, Model model) {
-        // TODO: if item not found, redirect, flash a message
+    public String getItem(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+        if (!itemService.existsById(id)) {
+            redirectAttributes.addFlashAttribute(
+                "error",
+                "Item of id %d does not exist".formatted(id)
+            );
+            return "redirect:/items";
+        }
 
-        model.addAttribute("id", id);
         model.addAttribute("item", itemService.getItem(id));
         return "item";
     }
@@ -42,34 +48,64 @@ public class ItemWebController {
     }
 
     @PostMapping("/items/new")
-    public String createItem(@ModelAttribute Item item) {
-        // TODO: if any field is empty, redirect, flash a message
+    public String createItem(@ModelAttribute Item item, RedirectAttributes redirectAttributes) {
+        if (item.hasMissingFieldsExceptId()) {
+            redirectAttributes.addFlashAttribute(
+                "error",
+                "description, name, and price are required"
+            );
+            return "redirect:/items/new";
+        }
 
         itemService.createItem(item);
         return "redirect:/items";
     }
 
     @GetMapping("/items/{id}/edit")
-    public String editItemForm(@PathVariable Long id, Model model) {
-        // TODO: if item not found, redirect, flash a message
+    public String editItemForm(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+        if (!itemService.existsById(id)) {
+            redirectAttributes.addFlashAttribute(
+                "error",
+                "Item of id %d does not exist".formatted(id)
+            );
+            return "redirect:/items";
+        }
 
-        model.addAttribute("id", id);
         model.addAttribute("item", itemService.getItem(id));
         return "edit-item";
     }
 
     @PostMapping("/items/{id}/edit")
-    public String editItem(@PathVariable Long id, @ModelAttribute Item item) {
-        // TODO: if item not found, redirect, flash a message
-        // TODO: if any field is empty, redirect, flash a message
+    public String editItem(@PathVariable Long id, @ModelAttribute Item item, RedirectAttributes redirectAttributes) {
+        if (!itemService.existsById(id)) {
+            redirectAttributes.addFlashAttribute(
+                "error",
+                "Item of id %d does not exist".formatted(id)
+            );
+            return "redirect:/items";
+        }
+
+        if (item.hasMissingFieldsExceptId()) {
+            redirectAttributes.addFlashAttribute(
+                "error",
+                "description, name, and price are required"
+            );
+            return "redirect:/items/%d/edit".formatted(id);
+        }
 
         itemService.replaceItem(item, id);
         return "redirect:/items";
     }
     
     @DeleteMapping("/items/{id}/delete")
-    public String deleteItem(@PathVariable Long id) {
-        // TODO: if item not found, redirect, flash a message
+    public String deleteItem(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        if (!itemService.existsById(id)) {
+            redirectAttributes.addFlashAttribute(
+                "error",
+                "Item of id %d does not exist".formatted(id)
+            );
+            return "redirect:/items";
+        }
 
         itemService.deleteItem(id);
         return "redirect:/items";

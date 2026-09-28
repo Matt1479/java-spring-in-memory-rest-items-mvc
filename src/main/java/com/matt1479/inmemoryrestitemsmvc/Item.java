@@ -50,6 +50,11 @@ public class Item {
         this.price = price;
     }
 
+    public boolean hasMissingFieldsExceptId() {
+        return description == null || description.isEmpty() || name == null
+            || name.isEmpty() || price == null;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(description, id, name, price);

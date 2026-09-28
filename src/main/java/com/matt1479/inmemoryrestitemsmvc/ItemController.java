@@ -41,7 +41,12 @@ public class ItemController {
 
     @PostMapping("/api/items")
     public Item createItem(@RequestBody Item item) {
-        // TODO: if any field is empty, return an error
+        if (item.hasMissingFieldsExceptId()) {
+            throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "description, name, and price are required"
+            );
+        }
 
         return itemService.createItem(item);
     }
@@ -52,7 +57,12 @@ public class ItemController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
 
-        // TODO: if any field is empty, return an error
+        if (newItem.hasMissingFieldsExceptId()) {
+            throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "description, name, and price are required"
+            );
+        }
 
         return itemService.replaceItem(newItem, id);
     }

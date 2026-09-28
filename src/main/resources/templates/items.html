@@ -11,6 +11,8 @@
 
         <header th:replace="~{fragments/header :: header}"></header>
 
+        <div th:replace="~{fragments/flash-messages :: flash-messages}"></div>
+
         <main>
 
             <div th:if="${items != null and !items.isEmpty()}">
