@@ -1,9 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head th:replace="~{fragments/head :: head}">
         <title>Edit an item</title>
     </head>
 
@@ -13,30 +11,32 @@
 
         <div th:replace="~{fragments/flash-messages :: flash-messages}"></div>
 
-        <main>
+        <main class="container py-5 text-center">
 
             <h1>Edit an item</h1>
 
             <form th:action="@{/items/{id}/edit(id=${item.id})}" method="post">
-                <div>
+                <div class="mb-3">
                     <label for="description">Description</label>
-                    <input th:value="${item.description}" id="description" name="description" type="text">
+                    <input th:value="${item.description}" class="form-control" id="description" name="description" type="text">
                 </div>
 
-                <div>
+                <div class="mb-3">
                     <label for="name">Name</label>
-                    <input th:value="${item.name}" id="name" name="name" type="text">
+                    <input th:value="${item.name}" class="form-control" id="name" name="name" type="text">
                 </div>
 
-                <div>
+                <div class="mb-3">
                     <label for="price">Price</label>
-                    <input th:value="${item.price}" id="price" name="price" step="0.01" type="number">
+                    <input th:value="${item.price}" class="form-control" id="price" name="price" step="0.01" type="number">
                 </div>
 
-                <button type="submit">Edit item</button>
+                <button class="btn btn-success btn-lg" type="submit">Edit item</button>
             </form>
 
         </main>
+
+        <script th:replace="~{fragments/bootstrap-scripts :: scripts}"></script>
 
     </body>
 

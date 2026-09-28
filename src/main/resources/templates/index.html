@@ -1,9 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head th:replace="~{fragments/head :: head}">
         <title>Home</title>
     </head>
 
@@ -15,9 +13,11 @@
 
         <div th:replace="~{fragments/flash-messages :: flash-messages}"></div>
 
-        <main>
-            <p>View <a href="/items">items</a></p>
+        <main class="container py-5 text-center">
+            <a class="btn btn-primary btn-lg" href="/items"> View items</a>
         </main>
+
+        <script th:replace="~{fragments/bootstrap-scripts :: scripts}"></script>
 
     </body>
 

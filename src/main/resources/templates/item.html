@@ -1,9 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head th:replace="~{fragments/head :: head}">
         <title>Item</title>
     </head>
 
@@ -13,15 +11,19 @@
 
         <div th:replace="~{fragments/flash-messages :: flash-messages}"></div>
 
-        <main>
+        <main class="container py-5 text-center">
 
-            <div th:if="${item != null}">
-                <h1 th:text="${item.name}"></h1>
-                <p th:text="${item.description}"></p>
-                <p>Price: <span th:text="${item.price}"></span></p>
+            <div th:if="${item != null}" class="card">
+                <div class="card-body">
+                    <h1 th:text="${item.name}" class="card-title"></h1>
+                    <p th:text="${item.description}" class="card-text"></p>
+                    <p class="card-text">Price: <span th:text="${item.price}"></span></p>
+                </div>
             </div>
 
         </main>
+
+        <script th:replace="~{fragments/bootstrap-scripts :: scripts}"></script>
 
     </body>
 

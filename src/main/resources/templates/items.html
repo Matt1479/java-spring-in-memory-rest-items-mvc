@@ -1,9 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head th:replace="~{fragments/head :: head}">
         <title>Items</title>
     </head>
 
@@ -13,23 +11,29 @@
 
         <div th:replace="~{fragments/flash-messages :: flash-messages}"></div>
 
-        <main>
+        <main class="container py-5 text-center">
 
             <div th:if="${items != null and !items.isEmpty()}">
                 <h1>Items</h1>
 
                 <!-- `th:each` means: repeat this element, including all of its contents,
                     once for each item -->
-                <div th:each="item : ${items}">
-                    <h2 th:text="${'#' + item.id + ' - ' + item.name}"></h2>
-                    <a th:href="@{/items/{id}(id=${item.id})}">View item</a>
-                    <a th:href="@{/items/{id}/edit(id=${item.id})}">Edit item</a>
-                    <div>
-                        <form th:action="@{/items/{id}/delete(id=${item.id})}" method="post">
-                            <!-- Spring's hidden method support -->
-                            <input name="_method" type="hidden" value="delete">
-                            <button type="submit">Delete item</button>
-                        </form>
+                <div th:each="item : ${items}" class="card mb-3">
+                    <div class="card-body">
+                        <h2 th:text="${'#' + item.id + ' - ' + item.name}" class="card-title"></h2>
+                        <p class="card-text">
+                            <a th:href="@{/items/{id}(id=${item.id})}">View item</a>
+                        </p>
+                        <p class="card-text">
+                            <a th:href="@{/items/{id}/edit(id=${item.id})}">Edit item</a>
+                        </p>
+                        <div>
+                            <form th:action="@{/items/{id}/delete(id=${item.id})}" method="post">
+                                <!-- Spring's hidden method support -->
+                                <input name="_method" type="hidden" value="delete">
+                                <button class="btn btn-danger btn-lg" type="submit">Delete item</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -39,6 +43,8 @@
             </div>
 
         </main>
+
+        <script th:replace="~{fragments/bootstrap-scripts :: scripts}"></script>
 
     </body>
 

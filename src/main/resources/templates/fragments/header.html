@@ -1,7 +1,31 @@
 <header th:fragment="header">
-    <nav>
-        <a th:href="@{/}">Home</a>
-        <a th:href="@{/items}">View items</a>
-        <a th:href="@{/items/new}">Create item</a>
+
+    <nav class="bg-light border navbar navbar-expand-md navbar-light">
+
+        <div class="container-fluid">
+            
+            <a th:href="@{/}" class="navbar-brand">Home</a>
+            <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbar" data-bs-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbar">
+
+                <ul class="navbar-nav ms-auto mt-2">
+                    
+                    <li class="nav-item">
+                        <a th:href="@{/items}" class="nav-link">View items</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a th:href="@{/items/new}" class="nav-link">Create item</a>
+                    </li>
+
+                </ul>
+
+            </div>
+        </div>
+
     </nav>
+
 </header>
