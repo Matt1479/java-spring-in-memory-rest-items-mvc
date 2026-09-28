@@ -58,6 +58,8 @@ public class ItemWebController {
         }
 
         itemService.createItem(item);
+        redirectAttributes.addFlashAttribute("success",
+            "Successfully created an item of id %d".formatted(item.getId()));
         return "redirect:/items";
     }
 
@@ -94,6 +96,8 @@ public class ItemWebController {
         }
 
         itemService.replaceItem(item, id);
+        redirectAttributes.addFlashAttribute("success",
+            "Successfully edited an item of id %d".formatted(id));
         return "redirect:/items";
     }
     
@@ -108,6 +112,8 @@ public class ItemWebController {
         }
 
         itemService.deleteItem(id);
+        redirectAttributes.addFlashAttribute("success",
+            "Successfully deleted an item of id %d".formatted(id));
         return "redirect:/items";
     }
 

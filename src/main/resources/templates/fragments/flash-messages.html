@@ -1,4 +1,4 @@
-<div th:if="${success} or ${error}" th:fragment="flash-messages" class="alert alert-primary mb-0 text-center" role="alert">
-    <div th:if="${success}" th:text="${success}"></div>
-    <div th:if="${error}" th:text="${error}"></div>
+<div th:if="${success} or ${error}" th:fragment="flash-messages">
+    <div th:if="${success}" th:text="${success}" class="alert alert-primary mb-0 text-center" role="alert"></div>
+    <div th:if="${error}" th:text="${error}" class="alert alert-danger mb-0 text-center" role="alert"></div>
 </div>

@@ -31,7 +31,8 @@
                     <input th:value="${item.price}" class="form-control" id="price" name="price" step="0.01" type="number">
                 </div>
 
-                <button class="btn btn-success btn-lg" type="submit">Edit item</button>
+                <button class="btn btn-success btn-lg" type="submit">Confirm</button>
+                <a th:href="@{/items}" class="btn btn-warning btn-lg">Cancel</a>
             </form>
 
         </main>
